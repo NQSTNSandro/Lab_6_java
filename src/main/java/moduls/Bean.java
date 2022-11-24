@@ -4,7 +4,9 @@ package moduls;
 import services.FirstInterface;
 import services.SecondInterface;
 
-
+/**
+ * Класс Bean для теста
+ */
 public class Bean {
     @AutoInjectable
     private FirstInterface firstInterface;

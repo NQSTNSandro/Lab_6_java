@@ -9,8 +9,16 @@ import java.lang.reflect.Field;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * @author Sergey Bochkov
+ * @version lab 5
+ */
 public class Injector {
-
+    /**
+     * Метод inject принимает
+     * @param obj объект любого класса
+     * и с помощью рефлексии преобразовывает его
+     */
     public <T> T inject(T obj) {
         File file = new File("src/main/resources/data.properties");
         Properties properties = new Properties();
