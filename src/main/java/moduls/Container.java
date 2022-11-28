@@ -11,8 +11,11 @@ public class Container {
     @AutoInjectable
     private SecondInterface secondInterface;
 
+    @AutoInjectable
+    private Integer a;
+
     public void foo(){
-        System.out.println("Container running \n");
+        System.out.println("\nContainer running");
         firstInterface.printInfo();
         secondInterface.printAnotherInfo();
     }

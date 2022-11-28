@@ -32,41 +32,33 @@ public class Injector {
             field.setAccessible(true);
             if (field.isAnnotationPresent(AutoInjectable.class) && field.getType() == FirstInterface.class) {
                 try {
-                    Object someObject = null;
-                    try {
-                        Class<?> clazz = Class.forName(properties.getProperty("FirstInterface"));
-                        try {
-                            someObject = clazz.newInstance();
-                        } catch (InstantiationException e) {
-                            throw new RuntimeException(e);
-                        }
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                    field.set(obj, someObject);
+                    field.set(obj, getObject(properties, "FirstInterface"));
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
             }
             if (field.isAnnotationPresent(AutoInjectable.class) && field.getType() == SecondInterface.class) {
                 try {
-                    Object someObject = null;
-                    try {
-                        Class<?> clazz = Class.forName(properties.getProperty("SecondInterface"));
-                        try {
-                            someObject = clazz.newInstance();
-                        } catch (InstantiationException e) {
-                            throw new RuntimeException(e);
-                        }
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                    field.set(obj, someObject);
+                    field.set(obj, getObject(properties, "SecondInterface"));
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
             }
         }
         return obj;
+    }
+
+    /**
+     * @return new Instance для нашего интерфейса
+     */
+    private Object getObject(Properties properties, String str) {
+        try {
+            Object someObject = null;
+            Class<?> clazz = Class.forName(properties.getProperty(str));
+            someObject = clazz.newInstance();
+            return someObject;
+        } catch (IllegalAccessException | ClassNotFoundException | InstantiationException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
